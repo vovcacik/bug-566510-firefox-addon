@@ -1,0 +1,114 @@
+<!--
+  ** Extends Firefox tab API to support multiple tab selection. Mostly based on patches attached to
+  ** bug 566510. Does not override anything (yet).
+  ** @see https://bugzilla.mozilla.org/show_bug.cgi?id=566510
+  -->
+<bindings id="bug566510_tabBrowserBindingsOverlay"
+          xmlns="http://www.mozilla.org/xbl"
+          xmlns:xbl="http://www.mozilla.org/xbl"
+          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    <!--
+      ** Extends gBrowser.
+      ** @see http://mxr.mozilla.org/mozilla-release/source/browser/base/content/tabbrowser.xml#17
+      -->
+    <binding id="bug566510_tabbrowserOverlay" extends="chrome://browser/content/tabbrowser.xml#tabbrowser">
+        <implementation>
+            <!--
+              ** Returns array of visible multiselected tabs. This is not part of
+              ** the bug patch, but it's handy.
+              -->
+            <property name="selectedTabs" readonly="true">
+                <getter><![CDATA[
+                    return Array.filter(this.visibleTabs, function (tab) tab.multiselected);
+                ]]></getter>
+            </property>
+        </implementation>
+    </binding>
+
+    <!--
+      ** Extends tab container.
+      ** @see http://mxr.mozilla.org/mozilla-release/source/browser/base/content/tabbrowser.xml#3024
+      -->
+    <binding id="bug566510_tabbrowser-tabsOverlay" extends="chrome://browser/content/tabbrowser.xml#tabbrowser-tabs">
+        <implementation>
+            <!-- Not used in this addon, but defined in patch v12. -->
+            <property name="_numMultiselected" readonly="true">
+                <getter>
+                    return this.tabbrowser.selectedTabs.length;
+                </getter>
+            </property>
+
+            <!-- Unselects all tabs in current window. -->
+            <method name="_clearMultiselection">
+                <body><![CDATA[
+                    var tabs = this.tabbrowser.tabs;
+                    for (let i = 0; i < tabs.length; i++) {
+                        tabs[i].multiselected = false;
+                    }
+                ]]></body>
+            </method>
+        </implementation>
+    </binding>
+
+    <!--
+      ** Extends tab definition with "multiselected" boolean property and adds listeners to handle
+      ** keyboard shortcuts:
+      **   LMB         clears selection
+      **   Ctrl + LMB  toggles selection on one tab
+      **   Shift + LMB toggles selection on range of tabs
+      ** @see http://mxr.mozilla.org/mozilla-release/source/browser/base/content/tabbrowser.xml#4334
+      -->
+    <binding id="bug566510_tabbrowser-tabOverlay" extends="chrome://browser/content/tabbrowser.xml#tabbrowser-tab">
+        <implementation>
+            <property name="multiselected">
+                <getter>
+                    return this.getAttribute("multiselected") == "true";
+                </getter>
+                <setter><![CDATA[
+                    if (val && !this.multiselected) {
+                        this.setAttribute("multiselected", "true");
+                        //this.tabContainer._numMultiselected++;
+                    } else if (!val && this.multiselected) {
+                        this.removeAttribute("multiselected");
+                        //this.tabContainer._numMultiselected--;
+                    }
+                ]]></setter>
+            </property>
+            <field name="tabContainer" readonly="true">
+                this.parentNode
+            </field>
+        </implementation>
+        <handlers>
+            <!--
+              ** Clear multiselection if user clicks a tab (and accel or shift is held).
+              ** @see https://bugzilla.mozilla.org/show_bug.cgi?id=921010#c0
+              -->
+            <handler event="mousedown" button="0" phase="capturing" modifiers="accesskey alt meta any"><![CDATA[
+                this.tabContainer._clearMultiselection();
+            ]]></handler>
+
+            <!-- Ctrl + LMB. To prevent changing tab on multiselect stop event propagation. -->
+            <handler event="mousedown" button="0" phase="capturing" modifiers="accel"><![CDATA[
+                this.multiselected = !this.multiselected;
+                event.stopPropagation();
+            ]]></handler>
+
+            <!-- Shift + LMB To prevent changing tab on multiselect stop event propagation. -->
+            <handler event="mousedown" button="0" phase="capturing" modifiers="shift"><![CDATA[
+                var start = this.tabContainer.selectedItem._tPos;
+                var end = this._tPos;
+
+                if (start == end) {
+                    return;
+                } else if (start > end) {
+                    [start, end] = [end, start];
+                }
+
+                for (var i = start; i <= end; i++) {
+                    gBrowser.tabs[i].multiselected = true;
+                }
+                event.stopPropagation();
+            ]]></handler>
+        </handlers>
+    </binding>
+</bindings>
