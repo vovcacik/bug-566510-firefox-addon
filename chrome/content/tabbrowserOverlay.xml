@@ -105,7 +105,10 @@
                 }
 
                 for (var i = start; i <= end; i++) {
-                    gBrowser.tabs[i].multiselected = true;
+                    var tab = gBrowser.tabs[i];
+                    if (gBrowser.visibleTabs.indexOf(tab) != -1) {
+                        tab.multiselected = true;
+                    } //else, ignore hidden tabs.
                 }
                 event.stopPropagation();
             ]]></handler>
