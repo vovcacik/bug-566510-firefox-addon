@@ -9,6 +9,15 @@ Features
  - **Ctrl + Left mouse button** to toggle selection.
  - **Shift + Left mouse button** to select range of tabs.
  - **Left mouse button** to deselect.
+ - Multiselect support for items in tab context menu:
+   - Reload tabs
+   - Pin and unpin tabs
+   - Open tabs in new window
+   - Close tabs
+   - Remove all tabs but the multiselected
+ - Following features can't be extended/overriden at low level:
+   - Dragging tabs
+   - Move tabs to tab group (Panorama)
 
 API
 ---
