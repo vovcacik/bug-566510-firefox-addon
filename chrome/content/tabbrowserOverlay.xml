@@ -141,6 +141,33 @@
             </method>
 
             <!--
+              ** @see http://mxr.mozilla.org/mozilla-release/source/browser/base/content/tabbrowser.xml#1588
+              -->
+            <method name="removeAllTabsBut">
+                <parameter name="aTab"/>
+                <body><![CDATA[
+                    if (aTab.pinned)
+                        return;
+
+                    if (this.warnAboutClosingTabs(this.closingTabsEnum.OTHER)) {
+                        let tabs = this.visibleTabs;
+                        this.selectedTab = aTab;
+
+                        let closedTabs = 0;
+                        for (let i = tabs.length - 1; i >= 0; --i) {
+                            if (tabs[i] != aTab && !tabs[i].pinned &&
+                               (!aTab.multiselected || !tabs[i].multiselected)) {
+                                    this.removeTab(tabs[i], {animate: true});
+                                    closedTabs++;
+                            }
+                        }
+                        if ("SessionStore" in window) // Introduced sometime after Firefox 24.0
+                            SessionStore.setNumberOfTabsClosedLast(window, closedTabs);
+                    }
+                ]]></body>
+            </method>
+
+            <!--
               ** @see http://mxr.mozilla.org/mozilla-release/source/browser/base/content/tabbrowser.xml#1621
               -->
             <method name="removeTabs">
