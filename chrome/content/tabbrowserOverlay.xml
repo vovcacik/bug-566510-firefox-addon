@@ -24,6 +24,72 @@
             </property>
 
             <!--
+              ** @see http://mxr.mozilla.org/mozilla-release/source/browser/base/content/tabbrowser.xml#2117
+              -->
+            <method name="reloadTabs">
+                <parameter name="aTabs"/>
+                <body><![CDATA[
+                    if (!aTabs)
+                        return null;
+                    // When called by the tab context menu, aTabs is actually a tab
+                    if (aTabs instanceof XULElement) {
+                        if (aTabs.multiselected)
+                            aTabs = this.selectedTabs;
+                        else
+                            aTabs = [aTabs];
+                    }
+                    var self = this;
+                    aTabs.forEach(function(tab) {
+                        self.reloadTab(tab);
+                    });
+                ]]></body>
+            </method>
+
+            <!--
+              ** @see http://mxr.mozilla.org/mozilla-release/source/browser/base/content/tabbrowser.xml#187
+              -->
+            <method name="pinTabs">
+                <parameter name="aTabs"/>
+                <body><![CDATA[
+                    if (!aTabs)
+                        return null;
+                    // When called by the tab context menu, aTabs is actually a tab
+                    if (aTabs instanceof XULElement) {
+                        if (aTabs.multiselected)
+                            aTabs = this.selectedTabs;
+                        else
+                            aTabs = [aTabs];
+                    }
+                    var self = this;
+                    aTabs.forEach(function(tab) {
+                        self.pinTab(tab);
+                    });
+                ]]></body>
+            </method>
+
+            <!--
+              ** @see http://mxr.mozilla.org/mozilla-release/source/browser/base/content/tabbrowser.xml#213
+              -->
+            <method name="unpinTabs">
+                <parameter name="aTabs"/>
+                <body><![CDATA[
+                    if (!aTabs)
+                        return null;
+                    // When called by the tab context menu, aTabs is actually a tab
+                    if (aTabs instanceof XULElement) {
+                        if (aTabs.multiselected)
+                            aTabs = this.selectedTabs;
+                        else
+                            aTabs = [aTabs];
+                    }
+                    var self = this;
+                    aTabs.reverse().forEach(function(tab) {
+                        self.unpinTab(tab);
+                    });
+                ]]></body>
+            </method>
+
+            <!--
               ** Moves tabs to a new browser window, unless they are already the only tabs
               ** in the current window, in which case this will do nothing.
               ** @see http://mxr.mozilla.org/mozilla-release/source/browser/base/content/tabbrowser.xml#2286
