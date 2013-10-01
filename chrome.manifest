@@ -1,2 +1,3 @@
 content    bug566510    chrome/content/
 style      chrome://browser/content/browser.xul    chrome://bug566510/content/browserOverlay.css
+overlay    chrome://browser/content/browser.xul    chrome://bug566510/content/browserOverlay.xul

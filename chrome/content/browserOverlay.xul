@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ** 
+  -->
+<overlay id="bug566510_browserOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    <!--
+      ** @see http://mxr.mozilla.org/mozilla-release/source/browser/base/content/browser.xul#88
+      -->
+    <menupopup id="tabContextMenu">
+        <menuitem id="context_openTabInWindow"
+                  oncommand="gBrowser.replaceTabsWithWindow(TabContextMenu.contextTab);"/>
+    </menupopup>
+</overlay>

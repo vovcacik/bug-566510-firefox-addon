@@ -22,6 +22,57 @@
                     return Array.filter(this.visibleTabs, function (tab) tab.multiselected);
                 ]]></getter>
             </property>
+
+            <!--
+              ** Moves tabs to a new browser window, unless they are already the only tabs
+              ** in the current window, in which case this will do nothing.
+              ** @see http://mxr.mozilla.org/mozilla-release/source/browser/base/content/tabbrowser.xml#2286
+              -->
+            <method name="replaceTabsWithWindow">
+                <parameter name="aTabs"/>
+                <body><![CDATA[
+                    if (!aTabs || this.tabs.length == 1)
+                        return null;
+                    // When called by the tab context menu, aTabs is actually a tab
+                    if (aTabs instanceof XULElement) {
+                        if (aTabs.multiselected)
+                            aTabs = this.selectedTabs;
+                        else
+                            aTabs = [aTabs];
+                    }
+                    if (!aTabs.length || aTabs.length == this.visibleTabs.length)
+                        return null;
+                    let tabToSelect = null;
+                    let win = this.replaceTabWithWindow(aTabs.shift());
+                    // We're done if there was only one tab to detach.
+                    if (!aTabs.length)
+                        return win;
+                    let moveTheRest = function() {
+                        win.removeEventListener("load", arguments.callee, false);
+                        let remoteBrowser = win.gBrowser;
+                        remoteBrowser.selectedTab.multiselected = true;
+                        aTabs.forEach(function(tab) {
+                            let newTab = remoteBrowser.addTab("about:blank");
+                            let newBrowser = remoteBrowser.getBrowserForTab(newTab);
+                            newBrowser.stop();
+                            newBrowser.docShell;
+                            if (!tabToSelect && tab.selected)
+                                tabToSelect = newTab;
+                            remoteBrowser.swapBrowsersAndCloseOther(newTab, tab);
+                            newTab.multiselected = true;
+                        });
+                        if (tabToSelect) {
+                            // we need to wait until navigation is initialized
+                            setTimeout(function() {
+                                remoteBrowser.selectedTab = tabToSelect;
+                            }, 0);
+                        }
+                    };
+                    if (win)
+                        win.addEventListener("load", moveTheRest, false);
+                    return win;
+                ]]></body>
+            </method>
         </implementation>
     </binding>
 
