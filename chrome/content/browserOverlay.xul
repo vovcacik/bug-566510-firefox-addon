@@ -17,5 +17,7 @@
                   oncommand="gBrowser.unpinTabs(TabContextMenu.contextTab);"/>
         <menuitem id="context_openTabInWindow"
                   oncommand="gBrowser.replaceTabsWithWindow(TabContextMenu.contextTab);"/>
+        <menuitem id="context_closeTab"
+            oncommand="gBrowser.removeTabs(TabContextMenu.contextTab, { animate: true });"/>
     </menupopup>
 </overlay>
