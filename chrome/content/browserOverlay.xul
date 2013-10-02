@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  ** 
+  ** Replaces some event handlers to support multiselection for native tab
+  ** context menu items.
   -->
 <overlay id="bug566510_browserOverlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    <script src="chrome://bug566510/content/browser-tabviewOverlay.js"/>
+
     <!--
       ** @see http://mxr.mozilla.org/mozilla-release/source/browser/base/content/browser.xul#67
       -->
@@ -15,6 +18,11 @@
                   oncommand="gBrowser.pinTabs(TabContextMenu.contextTab);"/>
         <menuitem id="context_unpinTab"
                   oncommand="gBrowser.unpinTabs(TabContextMenu.contextTab);"/>
+        <menu id="context_tabViewMenu">
+            <menupopup id="context_tabViewMenuPopup"
+                       onpopupshowing="if (event.target == this) bug566510_TabView.moveToGroupPopupShowing(event);">
+            </menupopup>
+        </menu>
         <menuitem id="context_openTabInWindow"
                   oncommand="gBrowser.replaceTabsWithWindow(TabContextMenu.contextTab);"/>
         <menuitem id="context_closeTab"

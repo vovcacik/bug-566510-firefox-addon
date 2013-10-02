@@ -15,9 +15,9 @@ Features
    - Open tabs in new window
    - Close tabs
    - Remove all tabs but the multiselected
- - Following features can't be extended/overriden at low level:
-   - Dragging tabs
    - Move tabs to tab group (Panorama)
+ - Implementing following features would be too nasty:
+   - Dragging tabs
 
 API
 ---
