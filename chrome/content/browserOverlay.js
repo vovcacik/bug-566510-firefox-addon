@@ -17,7 +17,8 @@ var bug566510_TabContextMenu = {
             "context_closeTab"
         ];
 
-        if (TabContextMenu.contextTab.multiselected)
+        var contextTabs = TabContextMenu.contextTab.multiselected ? gBrowser.selectedTabs : [TabContextMenu.contextTab];
+        if (contextTabs.length > 1)
             style = "font-weight: bold;";
         for (var i = 0; i < menuItemIDs.length; i++) {
             var id = menuItemIDs[i];
