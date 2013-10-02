@@ -1,6 +1,6 @@
 <!--
   ** Extends Firefox tab API to support multiple tab selection. Mostly based on patches attached to
-  ** bug 566510. Does not override anything (yet).
+  ** bug 566510.
   ** @see https://bugzilla.mozilla.org/show_bug.cgi?id=566510
   -->
 <bindings id="bug566510_tabBrowserBindingsOverlay"
@@ -141,6 +141,7 @@
             </method>
 
             <!--
+              ** @override tabbrowser.removeAllTabsBut
               ** @see http://mxr.mozilla.org/mozilla-release/source/browser/base/content/tabbrowser.xml#1588
               -->
             <method name="removeAllTabsBut">
