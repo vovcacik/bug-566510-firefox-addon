@@ -6,12 +6,14 @@
   -->
 <overlay id="bug566510_browserOverlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    <script src="chrome://bug566510/content/browserOverlay.js"/>
     <script src="chrome://bug566510/content/browser-tabviewOverlay.js"/>
 
     <!--
       ** @see http://mxr.mozilla.org/mozilla-release/source/browser/base/content/browser.xul#67
       -->
-    <menupopup id="tabContextMenu">
+    <menupopup id="tabContextMenu"
+               onpopupshowing="if (event.target == this) bug566510_TabContextMenu.updateContextMenu(this);">
         <menuitem id="context_reloadTab"
                   oncommand="gBrowser.reloadTabs(TabContextMenu.contextTab);"/>
         <menuitem id="context_pinTab"
