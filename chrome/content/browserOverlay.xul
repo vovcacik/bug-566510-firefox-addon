@@ -8,6 +8,7 @@
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
     <script src="chrome://bug566510/content/browserOverlay.js"/>
     <script src="chrome://bug566510/content/browser-tabviewOverlay.js"/>
+    <script src="chrome://bug566510/content/browser-placesOverlay.js"/>
 
     <!--
       ** @see http://mxr.mozilla.org/mozilla-release/source/browser/base/content/browser.xul#67
@@ -30,4 +31,10 @@
         <menuitem id="context_closeTab"
             oncommand="gBrowser.removeTabs(TabContextMenu.contextTab, { animate: true });"/>
     </menupopup>
+
+    <!--
+      ** @see http://mxr.mozilla.org/mozilla-release/source/browser/base/content/browser-sets.inc#59
+      -->
+    <command id="Browser:BookmarkAllTabs"
+             oncommand="if (TabContextMenu.contextTab.multiselected &amp;&amp; gBrowser.selectedTabs.length &gt; 1) {bug566510_PlacesCommandHook.bookmarkSelectedPages();} else {PlacesCommandHook.bookmarkCurrentPages();}"/>
 </overlay>

@@ -14,6 +14,7 @@ var bug566510_TabContextMenu = {
             "context_tabViewMenu",
             "context_openTabInWindow",
             "context_closeOtherTabs",
+            "context_bookmarkAllTabs",
             "context_closeTab"
         ];
 
