@@ -8,9 +8,7 @@ var bug566510_TabView = {
      * this way preserves arguments. There is one menuitem for each tab group
      * plus one for "New group" item.
      */
-    moveToGroupPopupShowing: function (event) {
-        TabView.moveToGroupPopupShowing(event);
-
+    moveToGroupPopupShown: function (event) {
         var popup = event.target;
         var menuItems = popup.getElementsByTagName("menuitem");
         for (var i = 0; i < menuItems.length; i++){

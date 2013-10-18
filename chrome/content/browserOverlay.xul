@@ -23,7 +23,7 @@
                   oncommand="gBrowser.unpinTabs(TabContextMenu.contextTab);"/>
         <menu id="context_tabViewMenu">
             <menupopup id="context_tabViewMenuPopup"
-                       onpopupshowing="if (event.target == this) bug566510_TabView.moveToGroupPopupShowing(event);">
+                       onpopupshown="if (event.target == this) bug566510_TabView.moveToGroupPopupShown(event);">
             </menupopup>
         </menu>
         <menuitem id="context_openTabInWindow"
