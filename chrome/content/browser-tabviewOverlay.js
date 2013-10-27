@@ -9,6 +9,14 @@ var bug566510_TabView = {
      * plus one for "New group" item.
      */
     moveToGroupPopupShown: function (event) {
+        if (!TabView.getContentWindow()) {
+            // The panorama is not yet initialized.
+            var self = this;
+            TabView._initFrame(function() {
+                self.moveToGroupPopupShown(event);
+            });
+        }
+
         var popup = event.target;
         var menuItems = popup.getElementsByTagName("menuitem");
         for (var i = 0; i < menuItems.length; i++){
