@@ -150,7 +150,8 @@
                     if (aTab.pinned)
                         return;
 
-                    if (this.warnAboutClosingTabs(this.closingTabsEnum.OTHER)) {
+                    if (this.warnAboutClosingTabs(this.closingTabsEnum && this.closingTabsEnum.OTHER || false)) {
+                        //Note: this.closingTabsEnum is not defined in older Firefox versions.
                         let tabs = this.visibleTabs;
                         this.selectedTab = aTab;
 

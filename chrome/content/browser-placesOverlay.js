@@ -3,10 +3,10 @@
  */
 var bug566510_PlacesCommandHook = {
     get uniqueSelectedPages() {
-        let uniquePages = {};
-        let URIs = [];
+        var uniquePages = {};
+        var URIs = [];
         gBrowser.selectedTabs.forEach(function (tab) {
-            let spec = tab.linkedBrowser.currentURI.spec;
+            var spec = tab.linkedBrowser.currentURI.spec;
             if (!tab.pinned && !(spec in uniquePages)) {
                 uniquePages[spec] = null;
                 URIs.push(tab.linkedBrowser.currentURI);
@@ -15,7 +15,7 @@ var bug566510_PlacesCommandHook = {
         return URIs;
     },
     bookmarkSelectedPages: function () {
-        let pages = this.uniqueSelectedPages;
+        var pages = this.uniqueSelectedPages;
         if (pages.length > 1) {
             PlacesUIUtils.showBookmarkDialog({ action: "add"
                                              , type: "folder"
