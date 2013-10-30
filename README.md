@@ -1,8 +1,5 @@
-feature/css-selection
+feature/v12-selection
 =====================
 
-This branch is experiment how to highlight multiselected tabs other than just bold title.
-
-Things to keep an eye on:
- - other than stock theme compatibility
- - Tree Style Tab compatibility
+This branch is implementing how the v12 patch highlight multiselected tabs.
+As in the patch, this is not really compatible with other than stock theme.
