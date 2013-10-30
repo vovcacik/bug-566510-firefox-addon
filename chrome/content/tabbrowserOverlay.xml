@@ -240,6 +240,11 @@
                         this.removeAttribute("multiselected");
                         //this.tabContainer._numMultiselected--;
                     }
+
+                    // update multiselection observer
+                    var multiselection = this.tabContainer._numMultiselected > 1;
+                    var broadcaster = document.getElementById("multiselectionBroadcaster");
+                    broadcaster.setAttribute("multiselection", multiselection);
                 ]]></setter>
             </property>
             <field name="tabContainer" readonly="true">

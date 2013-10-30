@@ -22,11 +22,18 @@ Features
 API
 ---
 
- - **gBrowser.selectedTabs**  
-   Returns array of multiselected tabs that are visible, otherwise empty array.  
-   _Example of hidden tabs are the ones in different tab/panorama/tab-candy group._
- - **aTab.multiselected**  
-   Writable property indicating the tab is multiselected.
+ - From the patch (possibly forward compatible):
+   - **aTab.multiselected**  
+     Writable property indicating the tab is multiselected.
+ - From this addon only:
+   - **gBrowser.selectedTabs**  
+     Returns array of multiselected tabs that are visible, otherwise empty array.  
+     _Example of hidden tabs are the ones in different tab/panorama/tab-candy group._
+   - **multiselectionBroadcaster**  
+     changes state on tab multiple selection/deselection.
+   - **multiselectionContextBroadcaster**  
+     is same like above, but requires the change  
+     to occur in appropriate context (currently tab context menu, but can be extended).
 
 [multiselect project]: https://wiki.mozilla.org/Firefox/Projects/Tab_Multi-Selection
 [bug 566510]: https://bugzilla.mozilla.org/show_bug.cgi?id=566510

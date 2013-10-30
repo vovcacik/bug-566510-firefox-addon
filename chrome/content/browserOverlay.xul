@@ -16,20 +16,28 @@
     <menupopup id="tabContextMenu"
                onpopupshowing="if (event.target == this) bug566510_TabContextMenu.updateContextMenu(this);">
         <menuitem id="context_reloadTab"
-                  oncommand="gBrowser.reloadTabs(TabContextMenu.contextTab);"/>
+                  oncommand="gBrowser.reloadTabs(TabContextMenu.contextTab);"
+                  observes="multiselectionContextBroadcaster"/>
         <menuitem id="context_pinTab"
-                  oncommand="gBrowser.pinTabs(TabContextMenu.contextTab);"/>
+                  oncommand="gBrowser.pinTabs(TabContextMenu.contextTab);"
+                  observes="multiselectionContextBroadcaster"/>
         <menuitem id="context_unpinTab"
-                  oncommand="gBrowser.unpinTabs(TabContextMenu.contextTab);"/>
-        <menu id="context_tabViewMenu">
+                  oncommand="gBrowser.unpinTabs(TabContextMenu.contextTab);"
+                  observes="multiselectionContextBroadcaster"/>
+        <menu id="context_tabViewMenu"
+              observes="multiselectionContextBroadcaster">
             <menupopup id="context_tabViewMenuPopup"
                        onpopupshown="if (event.target == this) bug566510_TabView.moveToGroupPopupShown(event);">
             </menupopup>
         </menu>
         <menuitem id="context_openTabInWindow"
-                  oncommand="gBrowser.replaceTabsWithWindow(TabContextMenu.contextTab);"/>
+                  oncommand="gBrowser.replaceTabsWithWindow(TabContextMenu.contextTab);"
+                  observes="multiselectionContextBroadcaster"/>
+        <menuitem id="context_closeOtherTabs" observes="multiselectionContextBroadcaster"/>
+        <menuitem id="context_bookmarkAllTabs" observes="multiselectionContextBroadcaster"/>
         <menuitem id="context_closeTab"
-            oncommand="gBrowser.removeTabs(TabContextMenu.contextTab, { animate: true });"/>
+            oncommand="gBrowser.removeTabs(TabContextMenu.contextTab, { animate: true });"
+            observes="multiselectionContextBroadcaster"/>
     </menupopup>
 
     <!--
@@ -37,4 +45,13 @@
       -->
     <command id="Browser:BookmarkAllTabs"
              oncommand="if (TabContextMenu.contextTab.multiselected &amp;&amp; gBrowser.selectedTabs.length &gt; 1) {bug566510_PlacesCommandHook.bookmarkSelectedPages();} else {PlacesCommandHook.bookmarkCurrentPages();}"/>
+
+    <!--
+      ** @see http://mxr.mozilla.org/mozilla-release/source/browser/base/content/browser-sets.inc#128
+      -->
+    <broadcasterset id="mainBroadcasterSet">
+        <!-- tab multiselection broadcasters -->
+        <broadcaster id="multiselectionBroadcaster" multiselection="false"/>
+        <broadcaster id="multiselectionContextBroadcaster" multiselection="false"/>
+    </broadcasterset>
 </overlay>
