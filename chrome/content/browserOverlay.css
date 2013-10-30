@@ -16,11 +16,19 @@ tabbrowser {
 /**
  * Define how multiselected tab should look like.
  */
-.tabbrowser-tab[multiselected="true"] .tab-text {
-    background-image:
-        linear-gradient(225deg, red 5px, transparent 5px),
-        linear-gradient(Highlight, Highlight);
-    color: HighlightText;
+.tabbrowser-tab[multiselected="true"],
+.tabbrowser-tab[selected="true"][multiselected="true"],
+#tabbrowser-tabs[tabsontop="true"] > .tabbrowser-tab[selected="true"][multiselected="true"] {
+    -moz-border-top-colors: rgba(40,57,78,.04) rgba(36,135,255,.9) rgba(161,203,255,.6);
+    -moz-border-bottom-colors: rgba(40,57,78,.04) rgba(36,135,255,.9) rgba(161,203,255,.6);
+    -moz-border-right-colors: rgba(40,57,78,.04) rgba(36,135,255,.9) rgba(161,203,255,.6);
+    -moz-border-left-colors: rgba(40,57,78,.04) rgba(36,135,255,.9) rgba(161,203,255,.6);
+}
+
+.tabbrowser-tab[multiselected="true"],
+.tabbrowser-tab[selected="true"][multiselected="true"],
+#tabbrowser-tabs[tabsontop="true"] > .tabbrowser-tab[selected="true"][multiselected="true"] {
+    -moz-border-image: url(chrome://bug566510/browser/tabbrowser/tab-multiselect.png) 4 5 3 6 / 4px 5px 3px 6px;
 }
 
 /**
