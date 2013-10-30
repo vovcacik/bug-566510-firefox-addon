@@ -45,4 +45,13 @@
       -->
     <command id="Browser:BookmarkAllTabs"
              oncommand="if (TabContextMenu.contextTab.multiselected &amp;&amp; gBrowser.selectedTabs.length &gt; 1) {bug566510_PlacesCommandHook.bookmarkSelectedPages();} else {PlacesCommandHook.bookmarkCurrentPages();}"/>
+
+    <!--
+      ** @see http://mxr.mozilla.org/mozilla-release/source/browser/base/content/browser-sets.inc#128
+      -->
+    <broadcasterset id="mainBroadcasterSet">
+        <!-- tab multiselection broadcasters -->
+        <broadcaster id="multiselectionBroadcaster" multiselection="false"/>
+        <broadcaster id="multiselectionContextBroadcaster" multiselection="false"/>
+    </broadcasterset>
 </overlay>

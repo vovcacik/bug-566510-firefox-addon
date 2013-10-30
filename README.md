@@ -1,8 +1,10 @@
-feature/css-selection
-=====================
+feature/observers
+=================
 
-This branch is experiment how to highlight multiselected tabs other than just bold title.
+This branch implements two observers:
+ - **multiselectionBroadcaster** changes state on multi selection/deselection.
+ - **multiselectionContextBroadcaster** is same like above, but requires the change
+ to occur in appropriate context (currently tab context menu, but can be extended).
 
-Things to keep an eye on:
- - other than stock theme compatibility
- - Tree Style Tab compatibility
+Attributes to change:
+ - **multiselection** (used by some css rules)
