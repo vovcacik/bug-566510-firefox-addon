@@ -8,7 +8,7 @@
     <em:type>2</em:type>
 
     <em:name>Bug 566510 - Allow multiselect operations on tabs</em:name>
-    <em:version>0.12.2</em:version>
+    <em:version>0.12.3</em:version>
     <em:description>Extends Firefox API to support multiple tab selection. Based on patch attached to bug 566510.</em:description>
     <em:creator>Vlastimil Ovčáčík</em:creator>
     <em:contributor>Frank Yan</em:contributor>
