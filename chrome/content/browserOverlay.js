@@ -1,30 +1,16 @@
 var bug566510_TabContextMenu = {
     /**
-     * It just hooks on onpopupshowing event and then makes bold all menuitems
-     * that support multiselect.
+     * It just hooks on popupshowing event of tab context menu and updates
+     * the 'multiselection' attribute of (all) elements.
      */
     updateContextMenu: function(event) {
         TabContextMenu.updateContextMenu(event);
 
-        var style = "font-weight: normal;";
-        var menuItemIDs = [
-            "context_reloadTab",
-            "context_pinTab",
-            "context_unpinTab",
-            "context_tabViewMenu",
-            "context_openTabInWindow",
-            "context_closeOtherTabs",
-            "context_bookmarkAllTabs",
-            "context_closeTab"
-        ];
-
+        var menuItems = document.getElementsByAttribute("multiselection", "*");
         var contextTabs = TabContextMenu.contextTab.multiselected ? gBrowser.selectedTabs : [TabContextMenu.contextTab];
-        if (contextTabs.length > 1)
-            style = "font-weight: bold;";
-        for (var i = 0; i < menuItemIDs.length; i++) {
-            var id = menuItemIDs[i];
-            var menuItem = document.getElementById(id);
-            menuItem.setAttribute("style", style);
+        var multiselection = contextTabs.length > 1;
+        for (var i = 0; i < menuItems.length; i++) {
+            menuItems[i].setAttribute("multiselection", multiselection);
         }
     }
 }
