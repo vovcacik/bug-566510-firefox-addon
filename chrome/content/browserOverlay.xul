@@ -16,20 +16,28 @@
     <menupopup id="tabContextMenu"
                onpopupshowing="if (event.target == this) bug566510_TabContextMenu.updateContextMenu(this);">
         <menuitem id="context_reloadTab"
-                  oncommand="gBrowser.reloadTabs(TabContextMenu.contextTab);"/>
+                  oncommand="gBrowser.reloadTabs(TabContextMenu.contextTab);"
+                  multiselection="false"/>
         <menuitem id="context_pinTab"
-                  oncommand="gBrowser.pinTabs(TabContextMenu.contextTab);"/>
+                  oncommand="gBrowser.pinTabs(TabContextMenu.contextTab);"
+                  multiselection="false"/>
         <menuitem id="context_unpinTab"
-                  oncommand="gBrowser.unpinTabs(TabContextMenu.contextTab);"/>
-        <menu id="context_tabViewMenu">
+                  oncommand="gBrowser.unpinTabs(TabContextMenu.contextTab);"
+                  multiselection="false"/>
+        <menu id="context_tabViewMenu"
+              multiselection="false">
             <menupopup id="context_tabViewMenuPopup"
                        onpopupshown="if (event.target == this) bug566510_TabView.moveToGroupPopupShown(event);">
             </menupopup>
         </menu>
         <menuitem id="context_openTabInWindow"
-                  oncommand="gBrowser.replaceTabsWithWindow(TabContextMenu.contextTab);"/>
+                  oncommand="gBrowser.replaceTabsWithWindow(TabContextMenu.contextTab);"
+                  multiselection="false"/>
+        <menuitem id="context_closeOtherTabs" multiselection="false"/>
+        <menuitem id="context_bookmarkAllTabs" multiselection="false"/>
         <menuitem id="context_closeTab"
-            oncommand="gBrowser.removeTabs(TabContextMenu.contextTab, { animate: true });"/>
+            oncommand="gBrowser.removeTabs(TabContextMenu.contextTab, { animate: true });"
+            multiselection="false"/>
     </menupopup>
 
     <!--
