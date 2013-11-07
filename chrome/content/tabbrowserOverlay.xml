@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   ** Extends Firefox tab API to support multiple tab selection. Mostly based on patches attached to
   ** bug 566510.
