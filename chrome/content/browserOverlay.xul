@@ -6,6 +6,7 @@
   -->
 <overlay id="bug566510_browserOverlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    <script src="chrome://bug566510/content/compatibility/compatibility.js"/>
     <script src="chrome://bug566510/content/browserOverlay.js"/>
     <script src="chrome://bug566510/content/browser-tabviewOverlay.js"/>
     <script src="chrome://bug566510/content/browser-placesOverlay.js"/>
