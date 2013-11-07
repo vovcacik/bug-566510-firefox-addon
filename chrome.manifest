@@ -1,3 +1,5 @@
 content    bug566510    chrome/content/
 style      chrome://browser/content/browser.xul    chrome://bug566510/content/browserOverlay.css
 overlay    chrome://browser/content/browser.xul    chrome://bug566510/content/browserOverlay.xul
+
+override   chrome://tabmixplus/content/tab/tabbrowser_proxy.xml    chrome://bug566510/content/compatibility/tabmixplus/tabbrowser_proxy.xml
