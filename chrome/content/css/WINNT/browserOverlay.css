@@ -1,0 +1,33 @@
+/**
+ * Overlay tabbrowser, tabbrowser-tabs and tabbrowser-tab XBL definition.
+ */
+tabbrowser {
+    -moz-binding: url("chrome://bug566510/content/tabbrowserOverlay.xml#bug566510_tabbrowserOverlay");
+}
+
+.tabbrowser-tabs {
+    -moz-binding: url("chrome://bug566510/content/tabbrowserOverlay.xml#bug566510_tabbrowser-tabsOverlay");
+}
+
+.tabbrowser-tab {
+    -moz-binding: url("chrome://bug566510/content/tabbrowserOverlay.xml#bug566510_tabbrowser-tabOverlay");
+}
+
+/**
+ * Define how multiselected tab should look like.
+ */
+.tabbrowser-tab[multiselected="true"] .tab-text {
+    font-weight: bold;
+}
+
+.tabbrowser-tab[multiselected="true"] {
+    border-image: url(chrome://bug566510/content/images/tab-multiselect.png) 4 3 0 fill repeat stretch;
+    -moz-border-image: url(chrome://bug566510/content/images/tab-multiselect.png) 4 3 0 repeat stretch;
+}
+
+/**
+ * Define how elements that support tab multiselection should be highlighted.
+ */
+*[multiselection="true"] {
+    font-weight: bold;
+}

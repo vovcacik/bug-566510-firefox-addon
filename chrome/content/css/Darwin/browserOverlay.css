@@ -20,14 +20,9 @@ tabbrowser {
     font-weight: bold;
 }
 
-.tabbrowser-tab[multiselected="true"],
-.tabbrowser-tab[selected="true"][multiselected="true"],
-#tabbrowser-tabs[tabsontop="true"] > .tabbrowser-tab[selected="true"][multiselected="true"] {
-    -moz-border-top-colors: rgba(40,57,78,.04) rgba(36,135,255,.9) rgba(161,203,255,.6);
-    -moz-border-bottom-colors: rgba(40,57,78,.04) rgba(36,135,255,.9) rgba(161,203,255,.6);
-    -moz-border-right-colors: rgba(40,57,78,.04) rgba(36,135,255,.9) rgba(161,203,255,.6);
-    -moz-border-left-colors: rgba(40,57,78,.04) rgba(36,135,255,.9) rgba(161,203,255,.6);
-    -moz-border-image: url(chrome://bug566510/content/images/tab-multiselect.png) 4 5 3 6 / 4px 5px 3px 6px;
+.tabbrowser-tab[multiselected="true"] {
+    border-image: url(chrome://bug566510/content/images/tab-multiselect.png) 4 5 3 6 fill repeat stretch;
+    -moz-border-image: url(chrome://bug566510/content/images/tab-multiselect.png) 4 5 3 6 repeat stretch;
 }
 
 /**
